@@ -16,7 +16,7 @@ cursor = connection.cursor()
 # Insert event data
 for event in data["event"]:
     cursor.execute("""
-    INSERT INTO Events (event_id, event_name, event_date, home_team, away_team, league, venue, country)
+    INSERT OR IGNORE INTO Events (event_id, event_name, event_date, home_team, away_team, league, venue, country)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         event["idEvent"],

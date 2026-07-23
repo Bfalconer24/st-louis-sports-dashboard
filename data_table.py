@@ -7,7 +7,7 @@ cursor = connection.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS Teams(
     id INTEGER PRIMARY KEY,
-    team_name TEXT,
+    team_name TEXT UNIQUE,
     location TEXT,
     league TEXT
 )
