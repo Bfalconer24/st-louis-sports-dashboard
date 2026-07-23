@@ -11,4 +11,13 @@ teams = cursor.fetchall()
 for team in teams:
     print(team)
 
+cursor.execute("""
+SELECT * FROM Events
+""")
+
+events = cursor.fetchall()
+
+for event in events:
+    print(event)   
+
 connection.close()
