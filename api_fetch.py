@@ -2,7 +2,7 @@ import requests
 
 print("Sports Dashboard Started")
 
-url = "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Arsenal"
+url = "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Argentina" 
 
 print(url)
 
