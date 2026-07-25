@@ -20,4 +20,11 @@ events = cursor.fetchall()
 for event in events:
     print(event)   
 
+cursor.execute("SELECT * FROM Players")
+
+players = cursor.fetchall()
+
+for player in players:
+    print(player)
+
 connection.close()

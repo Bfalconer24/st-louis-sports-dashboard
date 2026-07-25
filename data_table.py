@@ -26,6 +26,16 @@ CREATE TABLE IF NOT EXISTS Events(
 )
   """) 
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS Players(
+    player_id TEXT PRIMARY KEY,
+    player_name TEXT,
+    team_name TEXT,
+    position TEXT,
+    nationality TEXT
+)
+""")
+
 connection.commit()
 
 connection.close()
