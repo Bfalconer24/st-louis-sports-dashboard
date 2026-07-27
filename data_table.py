@@ -35,6 +35,15 @@ CREATE TABLE IF NOT EXISTS Players(
     nationality TEXT
 )
 """)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS AI_Reports(
+    report_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    report_type TEXT,
+    subject TEXT,
+    report_text TEXT,
+    created_at TEXT
+)
+""")
 
 connection.commit()
 
