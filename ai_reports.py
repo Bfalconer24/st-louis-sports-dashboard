@@ -48,3 +48,16 @@ response = client.responses.create(
 )
 
 print(response.output_text)
+
+connection = sqlite3.connect("sports.db")
+cursor = connection.cursor()
+
+cursor.execute("""
+INSERT INTO AI_Reports (report_type, subject, report_text)
+VALUES (?, ?, ?)
+""", ("Scout Report", player[0], response.output_text))
+
+connection.commit()
+connection.close()
+
+print("Scout report saved to database!")
