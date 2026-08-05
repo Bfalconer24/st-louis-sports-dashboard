@@ -19,10 +19,14 @@ total_players = len(players)
 unique_positions = players["position"].nunique()
 unique_nationalities = players["nationality"].nunique()
 
+
+position_counts = players["position"].value_counts()
+
 print("\nChoose an option:")
 print("1. View Summary")
 print("2. View Top Positions")
-print("3. Exit")
+print("3. View AI Scout Reports")
+print("4. Exit")
 
 choice = input("\nSelection: ")
 
@@ -37,6 +41,21 @@ elif choice == "2":
         print(f"{position}: {count}")
 
 elif choice == "3":
+
+    connection = sqlite3.connect("sports.db")
+
+    reports = pd.read_sql_query("""
+    SELECT subject, report_type
+    FROM AI_Reports
+    """, connection)
+
+    connection.close()
+
+    print("\n=== AI Scout Reports ===")
+
+    print(reports)
+
+elif choice == "4":
     print("\nGoodbye!")
 
 else:
