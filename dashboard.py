@@ -21,42 +21,50 @@ unique_nationalities = players["nationality"].nunique()
 
 
 position_counts = players["position"].value_counts()
+running = True
 
-print("\nChoose an option:")
-print("1. View Summary")
-print("2. View Top Positions")
-print("3. View AI Scout Reports")
-print("4. Exit")
+while running:
 
-choice = input("\nSelection: ")
 
-if choice == "1":
-    print(f"\nTotal Players: {total_players}")
-    print(f"Unique Positions: {unique_positions}")
-    print(f"Unique Nationalities: {unique_nationalities}")
+    print("\nChoose an option:")
+    print("1. View Summary")
+    print("2. View Top Positions")
+    print("3. View AI Scout Reports")
+    print("4. Exit")
 
-elif choice == "2":
-    print("\n=== Top Positions ===")
-    for position, count in position_counts.items():
-        print(f"{position}: {count}")
+    choice = input("\nSelection: ")
 
-elif choice == "3":
+    if choice == "1":
+            print(f"\nTotal Players: {total_players}")
+            print(f"Unique Positions: {unique_positions}")
+            print(f"Unique Nationalities: {unique_nationalities}")
 
-    connection = sqlite3.connect("sports.db")
+    elif choice == "2":
+            print("\n=== Top Positions ===")
+            for position, count in position_counts.items():
+                print(f"{position}: {count}")
 
-    reports = pd.read_sql_query("""
-    SELECT subject, report_type
-    FROM AI_Reports
-    """, connection)
+    elif choice == "3":
 
-    connection.close()
+            connection = sqlite3.connect("sports.db")
 
-    print("\n=== AI Scout Reports ===")
+            reports = pd.read_sql_query("""
+            SELECT subject, report_type
+            FROM AI_Reports
+            """, connection)
 
-    print(reports)
+            connection.close()
 
-elif choice == "4":
-    print("\nGoodbye!")
+            print("\n=== AI Scout Reports ===")
 
-else:
-    print("\nInvalid selection.")
+            for index, row in reports.iterrows():
+                print("-" * 40)
+                print(f"Subject : {row['subject']}")
+                print(f"Type    : {row['report_type']}")
+
+    elif choice == "4":
+            print("\nGoodbye!")
+            running = False
+
+    else:
+            print("\nInvalid selection.") 
