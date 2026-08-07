@@ -29,8 +29,9 @@ while running:
     print("\nChoose an option:")
     print("1. View Summary")
     print("2. View Top Positions")
-    print("3. View AI Scout Reports")
-    print("4. Exit")
+    print("3. View Players by Nationality")
+    print("4. View AI Scout Reports")
+    print("5. Exit")
 
     choice = input("\nSelection: ")
 
@@ -45,26 +46,38 @@ while running:
                 print(f"{position}: {count}")
 
     elif choice == "3":
+        print("\n=== Players by Nationality ===")
+        nationality_counts = players["nationality"].value_counts()
+        for nationality, count in nationality_counts.items():
+            print(f"{nationality}: {count}")
 
-            connection = sqlite3.connect("sports.db")
 
-            reports = pd.read_sql_query("""
-            SELECT subject, report_type
-            FROM AI_Reports
-            """, connection)
-
-            connection.close()
-
-            print("\n=== AI Scout Reports ===")
-
-            for index, row in reports.iterrows():
-                print("-" * 40)
-                print(f"Subject : {row['subject']}")
-                print(f"Type    : {row['report_type']}")
 
     elif choice == "4":
-            print("\nGoodbye!")
-            running = False
 
+        connection = sqlite3.connect("sports.db")
+
+        reports = pd.read_sql_query("""
+            SELECT report_id, subject, report_type, created_at
+            FROM AI_Reports
+        """, connection)
+
+        connection.close()
+
+        print("\n=== AI Scout Reports ===")
+
+        for index, row in reports.iterrows():
+            print("=" * 40)
+            print(f"AI SCOUT REPORT #{row['report_id']}")
+            print("=" * 40)
+            print(f"Subject : {row['subject']}")
+            print(f"Type    : {row['report_type']}")
+            created = row["created_at"] if row["created_at"] else "Unknown"
+
+            print(f"Created : {created}")
+
+    elif choice == "5":
+        print("\nGoodbye!")
+        running = False
     else:
-            print("\nInvalid selection.") 
+        print("\nInvalid selection.")
