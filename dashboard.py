@@ -67,14 +67,17 @@ while running:
         print("\n=== AI Scout Reports ===")
 
         for index, row in reports.iterrows():
+            
+            created = row["created_at"] if row["created_at"] else "Unknown"
+
             print("=" * 40)
             print(f"AI SCOUT REPORT #{row['report_id']}")
             print("=" * 40)
             print(f"Subject : {row['subject']}")
             print(f"Type    : {row['report_type']}")
-            created = row["created_at"] if row["created_at"] else "Unknown"
-
             print(f"Created : {created}")
+
+            print()
 
     elif choice == "5":
         print("\nGoodbye!")
