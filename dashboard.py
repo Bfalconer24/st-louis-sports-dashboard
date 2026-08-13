@@ -1,10 +1,15 @@
 import sqlite3
 import pandas as pd
 
+DATABASE_NAME = "sports.db"
+
+def get_connection():
+    return sqlite3.connect(DATABASE_NAME)
+
 
 def load_players():
     try:
-        connection = sqlite3.connect("sports.db")
+        connection = get_connection()
 
         players = pd.read_sql_query("""
             SELECT player_name, position, nationality
@@ -50,7 +55,7 @@ def show_players_by_nationality(players):
 
 def show_ai_reports():
     try:
-        connection = sqlite3.connect("sports.db")
+        connection = get_connection()
 
         reports = pd.read_sql_query("""
             SELECT report_id, subject, report_type, created_at
