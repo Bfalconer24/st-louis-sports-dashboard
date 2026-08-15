@@ -1,8 +1,10 @@
+import os
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
 
 DATABASE_NAME = "sports.db"
+ASSETS_DIR = "assets"
 
 
 def get_connection():
@@ -39,7 +41,7 @@ def create_position_chart(players):
     fig.tight_layout()
 
     fig.savefig(
-        "position_distribution.png",
+        os.path.join(ASSETS_DIR, "position_distribution.png"),
         dpi=200,
         bbox_inches="tight"
     )
@@ -64,10 +66,11 @@ def create_nationality_chart(players):
     fig.tight_layout()
 
     fig.savefig(
-        "nationality_distribution.png",
+        os.path.join(ASSETS_DIR, "nationality_distribution.png"),
         dpi=200,
         bbox_inches="tight"
-    )
+)
+  
 
     plt.show()
 
@@ -89,7 +92,26 @@ def create_events_by_league_chart():
         kind="barh",
         ax=ax
     )
+    ax.set_xticks(
+        range(0, int(league_counts.max()) + 2)
+    )
+
+    ax.set_title("Events by League")
+    ax.set_xlabel("Number of Events")
+    ax.set_ylabel("League")
+
+    fig.tight_layout()
+
+    fig.savefig(
+        os.path.join(ASSETS_DIR, "events_by_league.png"),
+        dpi=200,
+        bbox_inches="tight"
+)
     
+
+    plt.show()
+
+
 def create_events_over_time_chart():
     connection = get_connection()
 
@@ -130,30 +152,16 @@ def create_events_over_time_chart():
     fig.tight_layout()
 
     fig.savefig(
-        "events_over_time.png",
+        os.path.join(ASSETS_DIR, "events_over_time.png"),
         dpi=200,
         bbox_inches="tight"
     )
 
     plt.show()
-
     
-    ax.set_title("Events by League")
-    ax.set_xlabel("Number of Events")
-    ax.set_ylabel("League")
-
-    fig.tight_layout()
-
-    fig.savefig(
-        "events_by_league.png",
-        dpi=200,
-        bbox_inches="tight"
-    )
-
-    plt.show()
-
 
 def main():
+    os.makedirs(ASSETS_DIR, exist_ok=True)
     players = load_players()
 
     create_position_chart(players)
