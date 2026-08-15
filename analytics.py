@@ -89,23 +89,7 @@ def create_events_by_league_chart():
         kind="barh",
         ax=ax
     )
-
-    ax.set_xticks(range(0, int(league_counts.max()) + 2))
-    ax.set_title("Events by League")
-    ax.set_xlabel("Number of Events")
-    ax.set_ylabel("League")
-
-    fig.tight_layout()
-
-    fig.savefig(
-        "events_by_league.png",
-        dpi=200,
-        bbox_inches="tight"
-    )
-
-    plt.show()
-
-
+    
 def create_events_over_time_chart():
     connection = get_connection()
 
