@@ -219,3 +219,5 @@ Future work includes:
 The project currently has a functioning API → SQLite → analytics → visualization pipeline, an interactive dashboard, and persisted AI scouting reports.
 
 The remaining work is focused on integration, robustness, testing, and refinement.
+
+<!-- GitHub Actions automation enabled -->
