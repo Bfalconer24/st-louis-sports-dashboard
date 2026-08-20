@@ -46,7 +46,7 @@ def create_position_chart(players):
         bbox_inches="tight"
     )
 
-    plt.show()
+    
 
 
 def create_nationality_chart(players):
@@ -72,7 +72,7 @@ def create_nationality_chart(players):
 )
   
 
-    plt.show()
+
 
 def create_events_by_league_chart():
     connection = get_connection()
@@ -109,7 +109,7 @@ def create_events_by_league_chart():
 )
     
 
-    plt.show()
+    
 
 
 def create_events_over_time_chart():
@@ -145,6 +145,12 @@ def create_events_over_time_chart():
         ax=ax
     )
 
+    if len(monthly_events) == 1:
+        ax.set_xlim(
+            monthly_events.index[0] - pd.Timedelta(days=15),
+            monthly_events.index[0] + pd.Timedelta(days=15)
+        )
+
     ax.set_title("Sports Events Over Time")
     ax.set_xlabel("Date")
     ax.set_ylabel("Number of Events")
@@ -157,7 +163,7 @@ def create_events_over_time_chart():
         bbox_inches="tight"
     )
 
-    plt.show()
+    
     
 
 def main():
