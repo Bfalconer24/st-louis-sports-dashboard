@@ -13,6 +13,19 @@ connection = sqlite3.connect("sports.db")
 
 cursor = connection.cursor()
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS Events (
+    event_id INTEGER PRIMARY KEY,
+    event_name TEXT NOT NULL,
+    event_date TEXT,
+    home_team TEXT,
+    away_team TEXT,
+    league TEXT,
+    venue TEXT,
+    country TEXT
+)
+""")
+
 # Insert event data
 for event in data["event"]:
     cursor.execute("""
