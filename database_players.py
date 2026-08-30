@@ -13,6 +13,16 @@ connection = sqlite3.connect("sports.db")
 
 cursor = connection.cursor()
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS Players (
+    player_id INTEGER PRIMARY KEY,
+    player_name TEXT NOT NULL,
+    team_name TEXT,
+    position TEXT,
+    nationality TEXT
+)
+""")
+
 # Insert player data
 for player in data["player"]:
     cursor.execute("""
