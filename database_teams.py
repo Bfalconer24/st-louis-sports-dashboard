@@ -12,7 +12,14 @@ data = response.json()
 connection = sqlite3.connect("sports.db")
 
 cursor = connection.cursor()
-
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS Teams (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    team_name TEXT NOT NULL,
+    location TEXT,
+    league TEXT
+)
+""")
 # Insert team data
 for team in data["teams"]:
     cursor.execute("""
